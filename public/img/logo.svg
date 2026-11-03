@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <!-- Konuşma balonu şeklinde bir "C" -->
+  <path d="M46 16.5A22 22 0 1 0 46 47.5" stroke="url(#g)" stroke-width="9" stroke-linecap="round"/>
+  <path d="M12 50l-4 9 11-4" fill="url(#g)"/>
+  <circle cx="33" cy="32" r="4.5" fill="#ecebf5"/>
+  <circle cx="47" cy="32" r="4.5" fill="#a78bfa"/>
+</svg>

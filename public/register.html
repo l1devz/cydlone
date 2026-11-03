@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kaydol | Cydlone</title>
+  <script src="/js/i18n.js"></script>
+  <link rel="icon" href="/img/logo.svg">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body class="auth-page">
+  <div class="brand-corner"><img src="/img/logo.svg" alt="" width="34" height="34"> Cydlone</div>
+  <div id="lang-picker" class="lang-corner"></div>
+
+  <main class="auth-card">
+    <h1>Bir hesap oluştur</h1>
+    <p class="subtitle">Cydlone'a katıl, topluluğunu bul.</p>
+
+    <form id="register-form" novalidate>
+      <div class="form-error" id="form-error"></div>
+
+      <div class="field" data-field="email">
+        <label for="email">E-posta<span class="req">*</span> <span class="err"></span></label>
+        <input class="input" id="email" name="email" type="email" autocomplete="email" required autofocus>
+      </div>
+
+      <div class="field" data-field="displayName">
+        <label for="displayName">Görünen ad <span class="err"></span></label>
+        <input class="input" id="displayName" name="displayName" maxlength="32" autocomplete="nickname">
+        <div class="hint">Başkaları seni böyle görür. Özel karakter ve emoji kullanabilirsin.</div>
+      </div>
+
+      <div class="field" data-field="username">
+        <label for="username">Kullanıcı adı<span class="req">*</span> <span class="err"></span></label>
+        <input class="input" id="username" name="username" maxlength="32" autocomplete="username" required>
+        <div class="hint">Sadece harf, rakam, alt çizgi _ ve nokta . kullan. Adının yanına otomatik bir #etiket eklenir.</div>
+      </div>
+
+      <div class="field" data-field="password">
+        <label for="password">Şifre<span class="req">*</span> <span class="err"></span></label>
+        <input class="input" id="password" name="password" type="password" autocomplete="new-password" required>
+      </div>
+
+      <div class="field" data-field="birthDate">
+        <label>Doğum tarihi<span class="req">*</span> <span class="err"></span></label>
+        <div class="dob">
+          <select class="select" name="month" aria-label="Ay" required><option value="">Ay</option></select>
+          <select class="select" name="day" aria-label="Gün" required><option value="">Gün</option></select>
+          <select class="select" name="year" aria-label="Yıl" required><option value="">Yıl</option></select>
+        </div>
+      </div>
+
+      <label class="checkbox">
+        <input type="checkbox" name="news">
+        <span>(İsteğe bağlı) Cydlone güncellemeleri, ipuçları ve özel teklifler içeren e-postalar almak istiyorum. Bunu istediğin zaman kapatabilirsin.</span>
+      </label>
+
+      <button class="btn-primary" type="submit">Devam Et</button>
+      <p class="legal">Kaydolarak Cydlone'un Hizmet Koşulları'nı ve Gizlilik Politikası'nı kabul etmiş olursun.</p>
+      <div class="switch"><a href="/login">Zaten bir hesabın var mı?</a></div>
+    </form>
+  </main>
+
+  <script src="/js/auth.js"></script>
+  <script>
+    const form = document.getElementById('register-form');
+    Auth.fillBirthSelects(form);
+    Auth.bindForm(form, '/api/auth/register', (f) => ({
+      email: f.email.value,
+      displayName: f.displayName.value,
+      username: f.username.value,
+      password: f.password.value,
+      birthDate: f.year.value && f.month.value && f.day.value
+        ? `${f.year.value}-${f.month.value.padStart(2, '0')}-${f.day.value.padStart(2, '0')}`
+        : '',
+    }));
+  </script>
+</body>
+</html>
